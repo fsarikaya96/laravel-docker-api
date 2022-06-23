@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Repository\RepositoryIoCRegister;
+use App\Services\ServiceIoCRegister;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -13,7 +15,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        // Register Repository IoC
+        RepositoryIoCRegister::register();
+        // Register Service IoC
+        ServiceIoCRegister::register();
     }
 
     /**
