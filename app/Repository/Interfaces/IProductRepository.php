@@ -14,5 +14,10 @@ interface IProductRepository
      */
 
  public function getProductById(int $id) : Product;
+
+    /**
+     * Get All Products
+     * @return Collection
+     */
  public function getProductsAll() : Collection;
 }

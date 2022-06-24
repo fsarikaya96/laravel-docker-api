@@ -14,9 +14,13 @@ class ProductRepository implements IProductRepository{
 
     public function getProductById(int $id): Product
     {
-        return Product::find($id);
+        return Product::findOrFail($id);
     }
 
+    /**
+     * Get All Products
+     * @return Collection
+     */
     public function getProductsAll(): Collection
     {
         return Product::all();

@@ -2,23 +2,46 @@
 
 namespace App\Http\Controllers\Api\v2;
 
+use App\Helpers\ResponseResult;
+use App\Helpers\ResponseCodes;
 use App\Http\Controllers\Controller;
 use App\Services\Interfaces\IProductService;
-use Illuminate\Http\Request;
+use Exception;
+use Illuminate\Http\JsonResponse;
 
 class ProductController extends Controller
 {
     private IProductService $productService;
+
+    /**
+     * Product construct
+     * @param IProductService $IProductService
+     */
     public function __construct(IProductService $IProductService)
     {
-    return $this->productService = $IProductService;
+        return $this->productService = $IProductService;
     }
-    public function getProductByID($id)
+
+    /**
+     * Get Product By ID
+     * @param $id
+     * @return JsonResponse
+     */
+    public function getProductByID($id): object
     {
-        return response()->json(['order_id' => $this->productService->getProductByID($id)]);
+        try {
+            return ResponseResult::generate(true, $this->productService->getProductById($id), ResponseCodes::HTTP_OK);
+        } catch (Exception $exception) {
+            return ResponseResult::generate(false,  $exception->getMessage(), ResponseCodes::HTTP_NOT_FOUND);
+        }
     }
-    public function getProductsAll()
+
+    /**
+     * Get All Products
+     * @return JsonResponse
+     */
+    public function getProductsAll(): object
     {
-        return response()->json(['orders' => $this->productService->getProductsAll()]);
+        return ResponseResult::generate(true, $this->productService->getProductsAll(), ResponseCodes::HTTP_OK);
     }
 }
