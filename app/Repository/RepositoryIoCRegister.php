@@ -1,9 +1,9 @@
 <?php
 namespace App\Repository;
-use App\Repository\{
-  Interfaces\IProductRepository,
-  Implementations\ProductRepository,
-};
+use App\Repository\{Implementations\UserRepository,
+    Interfaces\IProductRepository,
+    Implementations\ProductRepository,
+    Interfaces\IUserRepository};
 
 class RepositoryIoCRegister{
     /**
@@ -14,6 +14,7 @@ class RepositoryIoCRegister{
 
     public static function register() : void{
         app()->bind(IProductRepository::class,ProductRepository::class);
+        app()->bind(IUserRepository::class, UserRepository::class);
     }
 }
 
