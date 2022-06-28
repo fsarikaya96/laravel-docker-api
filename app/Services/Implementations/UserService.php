@@ -24,7 +24,7 @@ class UserService implements IUserService
      *
      * @return Authenticatable|null
      */
-    public static function _getLoggedUser(): ?Authenticatable
+    private function _getLoggedUser(): ?Authenticatable
     {
         return Auth::user() ?? null;
     }

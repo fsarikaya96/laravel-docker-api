@@ -26,7 +26,10 @@ class LoginController extends Controller
 
     public function login(Request $request): object
     {
-        $credentials = ['email' => $request->email, 'password' => $request->password,];
+        $credentials = [
+            'email' => $request->email,
+            'password' => $request->password
+        ];
         $validate = Validator::make($request->all(), [
             'email' => 'required',
             'password' => 'required',
@@ -35,8 +38,7 @@ class LoginController extends Controller
             return ResponseResult::generate(false, $validate->messages()->all(), ResponseCodes::HTTP_NOT_FOUND);
         }
         if(Auth::attempt($credentials)) {
-            $user = Auth::user();
-            return ResponseResult::generate(true,$this->userService->generateToken($user), ResponseCodes::HTTP_OK);
+            return ResponseResult::generate(true,$this->userService->generateToken(Auth::user()), ResponseCodes::HTTP_OK);
         }
         return ResponseResult::generate(false, "No Records Found", ResponseCodes::HTTP_NOT_FOUND);
     }
