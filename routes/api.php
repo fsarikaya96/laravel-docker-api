@@ -3,9 +3,9 @@
 use App\Http\Controllers\Api\v2\ProductController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,12 +24,12 @@ Route::middleware('auth:api')->group(function () {
         Route::get('products', [ProductController::class, 'getProductsAll']);
         Route::get('products/{id}', [ProductController::class, 'getProductByID']);
     });
-
+    Route::post('auth/logout', [LogoutController::class, 'logout']);
 });
 
-Route::group(['prefix' => 'auth'],function (){
-    Route::post('forgot-password',[ForgotPasswordController::class,'forgotPassword'])->name('passwords.sent');
-    Route::post('reset-password',[ResetPasswordController::class,'resetPassword'])->name('password.reset');
-    Route::post('register',[RegisterController::class,'register']);
-    Route::post('login',[LoginController::class,'login']);
+Route::group(['prefix' => 'auth'], function () {
+    Route::post('forgot-password', [ForgotPasswordController::class, 'forgotPassword'])->name('passwords.sent');
+    Route::post('reset-password', [ResetPasswordController::class, 'resetPassword'])->name('password.reset');
+    Route::post('register', [RegisterController::class, 'register']);
+    Route::post('login', [LoginController::class, 'login']);
 });
