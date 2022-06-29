@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Api\v2\CategoryController;
+use App\Http\Controllers\Api\v2\ProductCategoryController;
 use App\Http\Controllers\Api\v2\ProductController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\LoginController;
@@ -21,8 +23,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:api')->group(function () {
     Route::group(['prefix' => 'v2'], function () {
-        Route::get('products', [ProductController::class, 'getProductsAll']);
+        Route::get('products', [ProductController::class, 'getAllProducts']);
         Route::get('products/{id}', [ProductController::class, 'getProductByID']);
+        Route::get('categories',[CategoryController::class,'getAllCategories']);
+        Route::get('categories/{id}',[CategoryController::class,'getCategoryById']);
+        Route::get('category-product',[ProductCategoryController::class,'fetchCategoryProduct']);
     });
     Route::post('auth/logout', [LogoutController::class, 'logout']);
 });

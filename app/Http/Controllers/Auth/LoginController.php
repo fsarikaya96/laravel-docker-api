@@ -9,6 +9,7 @@ use App\Services\Interfaces\IUserService;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 
 class LoginController extends Controller
@@ -38,6 +39,8 @@ class LoginController extends Controller
             return ResponseResult::generate(false, $validate->messages()->all(), ResponseCodes::HTTP_NOT_FOUND);
         }
         if(Auth::attempt($credentials)) {
+            Log::channel('api')->info('Request function login()');
+            Log::channel('api')->info('User login successful  | name :'.Auth::user()->name);
             return ResponseResult::generate(true,$this->userService->generateToken(Auth::user()), ResponseCodes::HTTP_OK);
         }
         return ResponseResult::generate(false, "No Records Found", ResponseCodes::HTTP_NOT_FOUND);

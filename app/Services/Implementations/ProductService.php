@@ -41,9 +41,9 @@ class ProductService implements IProductService
      * Get All Products
      * @return Collection
      */
-    public function getProductsAll(): Collection
+    public function getAllProducts(): Collection
     {
-        Log::channel('api')->info('ProductService Called ---> Request getProductsAll() function');
-        return $this->productRepository->getProductsAll();
+        Log::channel('api')->info('ProductService Called ---> Request getAllProducts() function');
+        return $this->productRepository->getAllProducts();
     }
 }

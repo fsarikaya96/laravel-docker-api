@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Category;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Product;
@@ -16,13 +17,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+
+        DB::table('categories')->truncate();
         DB::table('products')->truncate();
         Product::factory(50)->create();
-        // \App\Models\User::factory(10)->create();
+        $this->call(CategorySeeder::class);
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+
     }
 }

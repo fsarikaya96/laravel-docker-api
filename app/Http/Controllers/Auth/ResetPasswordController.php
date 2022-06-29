@@ -7,7 +7,9 @@ use App\Helpers\ResponseResult;
 use App\Http\Controllers\Controller;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Str;
 
@@ -36,6 +38,8 @@ class ResetPasswordController extends Controller
             }
         );
         if ($status === Password::PASSWORD_RESET) {
+            Log::channel('api')->info('Request function resetPassword()');
+            Log::channel('api')->info('Password reset successful | email :'.$request->email);
             return ResponseResult::generate(true, "The password has been successfully changed.", ResponseCodes::HTTP_OK);
         }
         return ResponseResult::generate(false, "Invalid token provided", ResponseCodes::HTTP_BAD_REQUEST);

@@ -19,5 +19,5 @@ interface IProductRepository
      * Get All Products
      * @return Collection
      */
- public function getProductsAll() : Collection;
+ public function getAllProducts() : Collection;
 }

@@ -40,8 +40,8 @@ class ProductController extends Controller
      * Get All Products
      * @return JsonResponse
      */
-    public function getProductsAll(): object
+    public function getAllProducts(): object
     {
-        return ResponseResult::generate(true, $this->productService->getProductsAll(), ResponseCodes::HTTP_OK);
+        return ResponseResult::generate(true, $this->productService->getAllProducts(), ResponseCodes::HTTP_OK);
     }
 }

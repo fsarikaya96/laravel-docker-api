@@ -21,7 +21,7 @@ class ProductRepository implements IProductRepository{
      * Get All Products
      * @return Collection
      */
-    public function getProductsAll(): Collection
+    public function getAllProducts(): Collection
     {
         return Product::all();
     }
