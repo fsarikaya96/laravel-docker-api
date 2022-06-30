@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Category;
+use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Product;
@@ -21,6 +22,9 @@ class DatabaseSeeder extends Seeder
 
         DB::table('categories')->truncate();
         DB::table('products')->truncate();
+        DB::table('category_product')->truncate();
+        DB::table('users')->truncate();
+        User::factory(1)->create();
         Product::factory(50)->create();
         $this->call(CategorySeeder::class);
 

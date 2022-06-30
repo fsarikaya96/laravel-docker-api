@@ -1,34 +1,145 @@
-# Laravel Docker
+# Laravel 9.19.0 Api Controller
 
-### Run application
+# Install
 
-```
-docker-compose up -d --build
-```
-
-### Close application
+**1. Clone Project**
 
 ```
-docker-compose kill
+  $ https://github.com/fsarikaya96/laravel-docker-api.git
 ```
 
-### Key generate
+**2. Install**
 
 ```
-docker-compose exec app php artisan key:generate
+  $ docker-compose up -d
+  $ docker exec app composer install | composer update --no-scripts
+  $ docker exec app php artisan key:generate
+  $ docker exec app php artisan migrate | php artisan db:seed
+  $ docker exec app php artisan passport:install
 ```
 
-### Composer install
+# CURL
+
+**Get Token**
 
 ```
-docker exec app composer install
+curl -X POST \
+  http://localhost:8080/api/auth/login \
+  -H 'Accept: application/json' \
+  -H 'Content-Type: application/x-www-form-urlencoded' \
+  -d 'email=admin@admin.com&password=admin'
+  -d '{
+    "token" : "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9LCJpYcf7B-pRkzFOC2kWLTraQkT5YAnnVDi-az0lkmyj15Rkf15lzHg4zfgotpWOkiNfCUdPjvdz"
+    }'
 ```
-### Create vendor File
-```
-docker-compose exec app composer update --no-scripts
-```
-### Migrate
+
+**Forgot Password**
 
 ```
-docker exec app php artisan migrate
+curl -X POST \
+   http://localhost:8080/api/auth/forgot-password \
+  -H 'Content-Type: application/x-www-form-urlencoded' \
+  -d 'email=admin@admin.com'
+  -d '{
+        "success": true,
+        "message": "Check your email box."
+    }'
+
+```
+
+**Reset Password**
+
+```
+curl -X POST \
+   http://localhost:8080/api/auth/reset-password \
+  -H 'Accept: application/json' \
+  -H 'Content-Type: application/x-www-form-urlencoded' \
+  -H 'Authorization: Bearer {__TOKEN_CODE__}' \
+  -d 'token={__EMAIL_TOKEN_CODE__}' \
+  -d 'email=admin@admin.com' \
+  -d 'password=12345678' \
+  -d 'password_confirmation=12345678' \
+  -d '{
+        "success": true,
+        "message": "The password has been successfully changed."
+    }'
+```
+
+**Get All Products**
+
+```
+curl -X GET \
+  http://localhost:8080/api/v2/products \
+  -H 'Accept: application/json' \
+  -H 'Authorization: Bearer {__TOKEN_CODE__}' \
+  -H 'Content-Type: application/x-www-form-urlencoded' \
+```
+
+**Get Product By ID**
+
+```
+curl -X GET \
+  http://localhost:8080/api/v2/products/10 \
+  -H 'Accept: application/json' \
+  -H 'Authorization: Bearer {__TOKEN_CODE__}' \
+  -d '{
+        "id": 10,
+        "name": "Eum sunt dolore aut id possimus qui.",
+        "price": "124",
+        "is_active": 0,
+    }'
+```
+
+**Get All Categories**
+
+```
+curl -X GET \
+  http://localhost:8080/api/v2/categories \
+  -H 'Accept: application/json' \
+  -H 'Authorization: Bearer {__TOKEN_CODE__}' \
+```
+
+**Get Category By ID**
+
+```
+curl -X GET \
+  http://localhost:8080/api/v2/categories/1 \
+  -H 'Accept: application/json' \
+  -H 'Authorization: Bearer {__TOKEN_CODE__}' \
+  -d '{
+        "id": 1,
+        "name": "Electronic",
+        "sub_category": null,
+        "slug": "electronic",
+    }'
+```
+
+**Fetch Category and Product**
+
+```
+curl -X GET \
+  http://localhost:8080/api/v2/category-product \
+  -H 'Accept: application/json' \
+  -H 'Authorization: Bearer {__TOKEN_CODE__}' \
+  -d '{
+        "category_id": 1,
+        "Category": "Electronic",
+        "product_id": 10,
+        "Product": "Eum sunt dolore aut id possimus qui. Rerum eligendi ipsum atque illo nam dolores cupiditate id."
+    },
+    {
+        "category_id": 1,
+        "Category": "Electronic",
+        "product_id": 24,
+        "Product": "Quo voluptas quisquam tenetur dolor occaecati eveniet dolorem. Vitae enim velit deleniti omnis at."
+    }'
+```
+
+# Using
+
+```
+  Domain Driven Design
+  Dependency Injection
+  Logger
+  Custom ResponseResult
 ```

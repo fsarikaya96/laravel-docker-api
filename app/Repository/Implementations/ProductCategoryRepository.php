@@ -15,7 +15,7 @@ class ProductCategoryRepository implements IProductCategoryRepository
     public function fetchCategoryProduct():Collection
     {
         return DB::table('category_product')
-            ->select('categories.name as Category','products.name as Product')
+            ->select('categories.id as category_id','categories.name as Category','products.id as product_id','products.name as Product')
             ->join('products','category_product.product_id','products.id')
             ->join('categories','category_product.category_id','categories.id')
             ->get();

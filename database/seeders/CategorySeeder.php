@@ -16,6 +16,7 @@ class CategorySeeder extends Seeder
     public function run()
     {
         $category = DB::table('categories');
+        $category_product = DB::table('category_product');
 
         $id = $category->insertGetId(['name' => "Electronic", 'slug' => "electronic"]);
         $category->insert(['name' => "Computer/Tablet", 'slug' => "computer-tablet", 'sub_category' => $id]);
@@ -28,5 +29,10 @@ class CategorySeeder extends Seeder
         $category->insert(['name' => "Gym", 'slug' => "gym"]);
         $category->insert(['name' => "Personal care", 'slug' => "personal-care"]);
         $category->insert(['name' => "Fashion", 'slug' => "fashion"]);
+
+        $category_product->insert(['category_id' => 1, 'product_id' =>10]);
+        $category_product->insert(['category_id' => 1, 'product_id' =>24]);
+        $category_product->insert(['category_id' => 2, 'product_id' =>5]);
+        $category_product->insert(['category_id' => 4, 'product_id' =>20]);
     }
 }
