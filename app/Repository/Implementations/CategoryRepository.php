@@ -26,4 +26,12 @@ class CategoryRepository implements ICategoryRepository
     {
         return Category::all();
     }
+
+    /** Fetch Products By Category
+     * @return Collection
+     */
+    public function fetchProductsByCategory(): Collection
+    {
+        return Category::with('products')->get();
+    }
 }

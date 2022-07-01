@@ -25,9 +25,10 @@ Route::middleware('auth:api')->group(function () {
     Route::group(['prefix' => 'v2'], function () {
         Route::get('products', [ProductController::class, 'getAllProducts']);
         Route::get('products/{id}', [ProductController::class, 'getProductByID']);
+
         Route::get('categories',[CategoryController::class,'getAllCategories']);
         Route::get('categories/{id}',[CategoryController::class,'getCategoryById']);
-        Route::get('category-product',[ProductCategoryController::class,'fetchCategoryProduct']);
+        Route::get('category-product',[CategoryController::class,'fetchProductsByCategory']);
     });
     Route::post('auth/logout', [LogoutController::class, 'logout']);
 });

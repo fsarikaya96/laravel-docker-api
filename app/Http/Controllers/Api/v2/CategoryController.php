@@ -22,7 +22,7 @@ class CategoryController extends Controller
      */
     public function __construct(ICategoryService $ICategoryService)
     {
-         return $this->categoryService = $ICategoryService;
+        return $this->categoryService = $ICategoryService;
     }
 
     /**
@@ -33,13 +33,27 @@ class CategoryController extends Controller
     {
         return ResponseResult::generate(true, $this->categoryService->getAllCategories(), ResponseCodes::HTTP_OK);
     }
-    public function getCategoryById(int $id):object
+
+    /**
+     * Get Product By ID
+     * @param int $id
+     * @return object
+     */
+    public function getCategoryById(int $id): object
     {
         try {
-            return ResponseResult::generate(true,$this->categoryService->getCategoryById($id),ResponseCodes::HTTP_OK);
-        }catch (Exception $exception) {
-            return ResponseResult::generate(false,  $exception->getMessage(), ResponseCodes::HTTP_NOT_FOUND);
+            return ResponseResult::generate(true, $this->categoryService->getCategoryById($id), ResponseCodes::HTTP_OK);
+        } catch (Exception $exception) {
+            return ResponseResult::generate(false, $exception->getMessage(), ResponseCodes::HTTP_NOT_FOUND);
         }
+    }
 
+    /**
+     * Fetch Products By Category
+     * @return object
+     */
+    public function fetchProductsByCategory() : object
+    {
+        return ResponseResult::generate(true,$this->categoryService->fetchProductsByCategory(), ResponseCodes::HTTP_OK);
     }
 }

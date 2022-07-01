@@ -19,4 +19,8 @@ interface ICategoryRepository
      */
     public function getAllCategories() : Collection;
 
+    /** Fetch Products By Category
+     * @return Collection
+     */
+    public function fetchProductsByCategory() : Collection;
 }

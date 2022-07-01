@@ -114,7 +114,7 @@ curl -X GET \
     }'
 ```
 
-**Fetch Category and Product**
+**Fetch Products By Category**
 
 ```
 curl -X GET \
@@ -122,17 +122,33 @@ curl -X GET \
   -H 'Accept: application/json' \
   -H 'Authorization: Bearer {__TOKEN_CODE__}' \
   -d '{
-        "category_id": 1,
-        "Category": "Electronic",
-        "product_id": 10,
-        "Product": "Eum sunt dolore aut id possimus qui. Rerum eligendi ipsum atque illo nam dolores cupiditate id."
-    },
-    {
-        "category_id": 1,
-        "Category": "Electronic",
-        "product_id": 24,
-        "Product": "Quo voluptas quisquam tenetur dolor occaecati eveniet dolorem. Vitae enim velit deleniti omnis at."
-    }'
+            "id": 1,
+            "name": "Electronic",
+            "sub_category": null,
+            "slug": "electronic",
+            "products": [
+                {
+                    "id": 10,
+                    "name": "Eum sunt dolore aut id possimus qui. Rerum eligendi ipsum atque illo nam dolores cupiditate id.",
+                    "price": "124",
+                    "is_active": 0,
+                    "pivot": {
+                        "category_id": 1,
+                        "product_id": 10
+                    }
+                },
+                {
+                    "id": 24,
+                    "name": "Quo voluptas quisquam tenetur dolor occaecati eveniet dolorem. Vitae enim velit deleniti omnis at.",
+                    "price": "122",
+                    "is_active": 0,                
+                    "pivot": {
+                        "category_id": 1,
+                        "product_id": 24
+                    }
+                }
+            ]
+        }'
 ```
 
 # Using

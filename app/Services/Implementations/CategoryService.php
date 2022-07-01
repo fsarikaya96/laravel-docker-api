@@ -36,4 +36,9 @@ class CategoryService implements ICategoryService
         Log::channel('api')->info('CategoryService Called ---> Return get category by id : ' . $id);
         return $this->categoryRepository->getCategoryById($id);
     }
+    public function fetchProductsByCategory(): Collection
+    {
+        Log::channel('api')->info('CategoryService Called ---> Request fetchProductsByCategory function');
+        return $this->categoryRepository->fetchProductsByCategory();
+    }
 }
