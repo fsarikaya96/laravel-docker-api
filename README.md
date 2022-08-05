@@ -29,7 +29,7 @@ curl -X POST \
   -H 'Content-Type: application/x-www-form-urlencoded' \
   -d 'email=admin@admin.com&password=admin'
   -d '{
-    "token" : "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9LCJpYcf7B-pRkzFOC2kWLTraQkT5YAnnVDi-az0lkmyj15Rkf15lzHg4zfgotpWOkiNfCUdPjvdz"
+    "token" : "{_token}"
     }'
 ```
 
