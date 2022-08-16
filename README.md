@@ -1,4 +1,4 @@
-# Laravel 9.19.0 Api Controller
+# Laravel Api Controller
 
 # Install
 
